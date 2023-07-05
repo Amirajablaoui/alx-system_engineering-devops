@@ -1,3 +1,2 @@
-while getopts :
 #!/bin/bash
 ls
