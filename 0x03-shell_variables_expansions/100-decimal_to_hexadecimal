@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+/*
+*
+*
+*/
+
+char* decimal_to_hexadecimal(int decimal_number) {
+    // Allocate memory to store the hexadecimal number
+    char* hexadecimal_number = (char*)malloc(9 * sizeof(char)); // Max 8 characters + null terminator
+
+    // Convert the decimal number to hexadecimal
+    sprintf(hexadecimal_number, "%X", decimal_number);
+
+    return hexadecimal_number;
+}
+
+int main() {
+    // Get the decimal number from the environment variable
+    char* decimal_str = getenv("DECIMAL");
+
+    if (decimal_str) {
+        // Convert decimal string to an integer
+        int decimal_number = atoi(decimal_str);
+
+        // Convert to hexadecimal
+        char* hexadecimal_number = decimal_to_hexadecimal(decimal_number);
+
+        // Display the result
+        printf("%s\n", hexadecimal_number);
+
+        // Free allocated memory
+        free(hexadecimal_number);
+    } else {
+        printf("Error: 'DECIMAL' environment variable not found.\n");
+    }
+
+    return 0;
+}
+
