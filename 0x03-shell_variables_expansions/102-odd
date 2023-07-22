@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+#define MAX_LINE_LENGTH 1000
+
+int main() {
+    char line[MAX_LINE_LENGTH];
+    int line_number = 0;
+
+    printf("Enter input lines (max %d characters per line):\n", MAX_LINE_LENGTH);
+
+    while (fgets(line, sizeof(line), stdin) != NULL) {
+        // Check if the line number is even (starting with 0)
+        if (line_number % 2 == 0) {
+            printf("%s", line);
+        }
+        line_number++;
+    }
+
+    return 0;
+}
+

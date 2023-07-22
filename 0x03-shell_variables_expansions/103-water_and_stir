@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Function to convert the number from custom base to decimal
+function custom_base_to_decimal() {
+    local number="$1"
+    local base="$2"
+    echo "ibase=${#base};obase=A;${number^^}" | bc
+}
+
+# Function to convert the number from decimal to custom base
+function decimal_to_custom_base() {
+    local number="$1"
+    local base="$2"
+    echo "ibase=A;obase=${#base};${number}" | bc
+}
+
+# Get the numbers from environment variables
+water_number="$WATER"
+stir_number="$STIR"
+
+# Convert numbers from custom bases to decimal for arithmetic
+decimal_water=$(custom_base_to_decimal "$water_number" "water")
+decimal_stir=$(custom_base_to_decimal "$stir_number" "stir")
+
+# Perform the addition in decimal
+decimal_result=$((decimal_water + decimal_stir))
+
+# Convert the decimal result to the custom base
+bestchol_result=$(decimal_to_custom_base "$decimal_result" "bestchol")
+
+# Print the result
+echo "Result in base bestchol: $bestchol_result"
+

@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+char rot13(char ch) {
+    if ('a' <= ch && ch <= 'z')
+        return ((ch - 'a' + 13) % 26) + 'a';
+    else if ('A' <= ch && ch <= 'Z')
+        return ((ch - 'A' + 13) % 26) + 'A';
+    else
+        return ch;
+}
+
+void encrypt(char *text) {
+    for (int i = 0; text[i] != '\0'; ++i) {
+        text[i] = rot13(text[i]);
+    }
+}
+
+void decrypt(char *text) {
+    for (int i = 0; text[i] != '\0'; ++i) {
+        text[i] = rot13(text[i]);
+    }
+}
+
+int main() {
+    char text[1000];
+    int option;
+
+    printf("Enter the text to be encrypted/decrypted (max 1000 characters):\n");
+    fgets(text, sizeof(text), stdin);
+
+    printf("Choose an option:\n");
+    printf("1. Encrypt\n");
+    printf("2. Decrypt\n");
+    scanf("%d", &option);
+
+    if (option == 1) {
+        encrypt(text);
+        printf("Encrypted text: %s\n", text);
+    } else if (option == 2) {
+        decrypt(text);
+        printf("Decrypted text: %s\n", text);
+    } else {
+        printf("Invalid option!\n");
+    }
+
+    return 0;
+}
+
